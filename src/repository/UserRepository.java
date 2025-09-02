@@ -10,12 +10,11 @@ import model.User;
 public class UserRepository {
     
     public Optional<User> findByEmail(String email) {
-        // Busca um usuário no nosso mapa estático e retorna um Optional
         return Optional.ofNullable(InitialData.usersByEmail.get(email));
     }
 
     public User save(User user) {
-        // Salva ou atualiza um usuário no mapa
+
         InitialData.usersByEmail.put(user.getEmail(), user);
         return user;
     }

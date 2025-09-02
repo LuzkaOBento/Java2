@@ -16,7 +16,6 @@ public class SupportTicket {
         this.message = message;
     }
 
-    // Método Adicionado para corrigir o erro
     public User getUser() {
         return user;
     }

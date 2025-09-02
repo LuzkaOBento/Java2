@@ -4,7 +4,7 @@ import annotation.CsvColumn;
 
 public class Enrollment {
     private Student student;
-    private Course course; // <-- The attribute is here
+    private Course course; 
     @CsvColumn(name = "Progresso (%)")
     private double progress;
 
@@ -14,12 +14,11 @@ public class Enrollment {
         this.progress = 0.0;
     }
 
-    // Method to get the Course object
+
     public Course getCourse() {
         return course;
     }
 
-    // Usando métodos para obter os dados do CSV de objetos relacionados
     @CsvColumn(name = "Aluno")
     public String getStudentName() {
         return student.getName();

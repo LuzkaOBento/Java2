@@ -1,13 +1,16 @@
 package controller;
 
-import model.CourseStatus;
-import model.SubscriptionPlan;
+import dataconfig.InitialData;
+import dto.CourseEnrollmentDTO;
 import exceptions.EnrollmentException;
-import exceptions.CourseNotFoundException;
 import exceptions.UserNotFoundException;
+import java.util.InputMismatchException;
+import java.util.List;
+import java.util.Optional;
+import java.util.Scanner;
 import model.Course;
+import model.CourseStatus;
 import model.Student;
-import support.SupportTicket;
 import model.User;
 import repository.CourseRepository;
 import repository.UserRepository;
@@ -15,14 +18,9 @@ import service.CourseService;
 import service.EnrollmentService;
 import service.ReportService;
 import service.UserService;
+import support.SupportTicket;
 import util.GenericCsvExporter;
-import view.View;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Scanner;
-import dataconfig.InitialData;
+import view.View; // Importação da classe DTO
 
 public class AppController {
 
@@ -165,8 +163,14 @@ public class AppController {
     private void enrollStudentInCourse() {
         System.out.print("Digite o título do curso para se matricular: ");
         String title = scanner.nextLine();
+
         try {
-            enrollmentService.enrollStudent(loggedInUser.get().getEmail(), title);
+            // Cria a DTO com os dados do usuário e passa para o serviço
+            CourseEnrollmentDTO enrollmentDTO = new CourseEnrollmentDTO();
+            enrollmentDTO.setStudentEmail(loggedInUser.get().getEmail());
+            enrollmentDTO.setCourseTitle(title);
+            
+            enrollmentService.enrollStudent(enrollmentDTO.getStudentEmail(), enrollmentDTO.getCourseTitle());
         } catch (EnrollmentException e) {
             System.out.println("ERRO: " + e.getMessage());
         }

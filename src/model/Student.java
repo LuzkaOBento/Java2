@@ -6,7 +6,7 @@ import java.util.List;
 public class Student extends User {
     @CsvColumn(name = "Plano de Assinatura")
     private SubscriptionPlan subscriptionPlan;
-    private List<Enrollment> enrollments; // Não anotado, pois a lista de matrículas não é exportada em CSV de forma direta.
+    private List<Enrollment> enrollments; 
 
     public Student(String name, String email, SubscriptionPlan subscriptionPlan) {
         super(name, email);
